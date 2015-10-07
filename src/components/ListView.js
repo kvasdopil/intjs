@@ -4,45 +4,85 @@ import Big from './Big';
 import Modal from './Modal';
 
 export default class ListView extends React.Component {
-  render() {
+  renderHeader()
+  {
+    if(!this.props.title)
+      return null;
+
+    return <div className="panel-heading" style={{flexShrink: 0}}>
+        <h3 className="panel-title">
+          {this.props.title}
+        </h3>
+      </div>
+  }
+
+  renderTbar()
+  {
+    if(!this.props.tbar)
+      return null;
+
+    return <Tbar items={this.props.tbar} />
+  }
+
+  renderBbar()
+  {
+    if(!this.props.bbar)
+      return null;
+
+    return  <Tbar items={this.props.bbar} bottom="1" />
+  }
+
+  renderContent()
+  {
     var items = this.props.items ? this.props.items : [];
 
-    return <div className="panel panel-default" style={{height:"inherit", "margin":0}}>
-      {this.props.title ? <div className="panel-heading"><h3 className="panel-title">{this.props.title}</h3></div> : ""}
-      {this.props.tbar ? <Tbar items={this.props.tbar} /> : ""}
-
-      <div className="list-group">
+    return <div className="list-group" style={{flexGrow: 1, overflowY: "auto"}}>
           {items.map(item => {
             return <li className="list-group-item">
                 <Big {...item} />
               </li>
             })}
       </div>
+  }
 
-      {this.props.bbar ? <Tbar items={this.props.bbar} /> : ""}
+  renderDialogs()
+  {
+    var config = {
+      title: "Редактирование перенаправления",
+      items: [{
+          type: 'textbox',
+          label: 'Название',
+          id: 'name',
+          placeholder: "Введите имя"
+        },{
+          type:'email',
+          label:'Email',
+          id: 'email',
+          placeholder: "Введите адрес"
+        },{
+          type: 'password',
+          label:'Пароль',
+          id: 'pwd',
+          placeholder: "Введите пароль"
+        },{
+          type:'checkbox',
+          id: 'pingYaRu',
+          title: 'Пиновать ya.ru'
+        }]
+    };
 
-      <Modal title="Редактирование перенаправления" items={[
-            {
-              type: 'textbox',
-              label: 'Название',
-              id: 'name',
-              placeholder: "Введите имя"
-            },{
-              type:'email',
-              label:'Email',
-              id: 'email',
-              placeholder: "Введите адрес"
-            },{
-              type: 'password',
-              label:'Пароль',
-              id: 'pwd',
-              placeholder: "Введите пароль"
-            },{
-              type:'checkbox',
-              id: 'pingYaRu',
-              title: 'Пиновать ya.ru'
-            },
-      ]}/>
+    return <Modal {...config} />;
+  }
+
+  render()
+  {
+    return <div className="panel panel-default" style={{flexGrow:1, display: "flex", flexDirection: "column", alignItems: "stretch", marginBottom: 0}}>
+      {this.renderHeader()}
+      {this.renderTbar()}
+      {this.renderContent()}
+      {this.renderBbar()}
+
+      {this.renderDialogs()}
     </div>
   }
 }

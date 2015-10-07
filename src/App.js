@@ -5,11 +5,6 @@ import * as actions from './actions';
 import {connect} from 'react-redux';
 
 class Application extends React.Component {
-
-  test1() {
-    this.props.addItem('hello');
-  }
-
   render() {
     var config = {
       title: 'Перенаправления портов',
@@ -28,9 +23,18 @@ class Application extends React.Component {
       bbar: [{type:"Button", title: "Shalala"}]
     }
 
-    return <ListView {...config} />;
+    return <div style={{display: "flex", flexDirection: "row", alignItems: "stretch", height: "inherit"}}>
+        <div style={{padding: 10}}>
+          Sidebar here
+        </div>
+        <div style={{flexGrow: 1, alignItems:"stretch", display: "flex"}}>
+          <ListView {...config} />
+        </div>
+      </div>;
   }
 }
+
+//<ListView {...config} />
 
 function propMap(store) {
   return {

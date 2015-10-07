@@ -42,30 +42,43 @@ export default class Tbar extends React.Component {
     return groups;
   }
 
+  renderContent(groups)
+  {
+    return groups.map(group => {
+        var style={};
+        if(group.float)
+          style.float = group.float;
+
+        return <div className="btn-group" role="group" style={style}>
+          {group.items.map(item => {
+            switch(item.type)
+            {
+            case "SearchBox":
+              return <SearchBox {...item} />
+            case "Button":
+              return <Btn {...item} />
+            }
+          })}
+        </div>
+      });
+  }
+
   render() {
     var groups = this.getGroups(this.props.items);
 
     var tbarStyle = this.props.style ? this.props.style : {padding: "10px"};
 
+    tbarStyle.flexShrink = 0;
+
+    if(this.props.bottom)
+    {
+      return <div className="panel-footer" flexShrink="0" style={tbarStyle}>
+        {this.renderContent(groups)}
+      </div>
+    }
+
     return <div className="btn-toolbar" role="toolbar" style={tbarStyle}>
-
-        {groups.map(group => {
-          var style={};
-          if(group.float)
-            style.float = group.float;
-
-          return <div className="btn-group" role="group" style={style}>
-            {group.items.map(item => {
-              switch(item.type)
-              {
-              case "SearchBox":
-                return <SearchBox {...item} />
-              case "Button":
-                return <Btn {...item} />
-              }
-            })}
-          </div>
-        })}
+        {this.renderContent(groups)}
       </div>
   }
 }
