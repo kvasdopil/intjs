@@ -1,5 +1,5 @@
 import React from 'react';
-import Btn from './Btn';
+import Button from './Button';
 import SearchBox from './SearchBox';
 
 export default class Tbar extends React.Component {
@@ -56,7 +56,7 @@ export default class Tbar extends React.Component {
             case "SearchBox":
               return <SearchBox {...item} />
             case "Button":
-              return <Btn {...item} />
+              return <Button {...item} />
             }
           })}
         </div>
@@ -68,16 +68,14 @@ export default class Tbar extends React.Component {
 
     var tbarStyle = this.props.style ? this.props.style : {padding: "10px"};
 
-    tbarStyle.flexShrink = 0;
-
     if(this.props.bottom)
     {
-      return <div className="panel-footer" flexShrink="0" style={tbarStyle}>
+      return <div className="panel-footer region-south" flexShrink="0" style={tbarStyle}>
         {this.renderContent(groups)}
       </div>
     }
 
-    return <div className="btn-toolbar" role="toolbar" style={tbarStyle}>
+    return <div className="btn-toolbar region-north" role="toolbar" style={tbarStyle}>
         {this.renderContent(groups)}
       </div>
   }

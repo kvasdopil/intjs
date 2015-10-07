@@ -14,6 +14,29 @@
   body, #app {
     height: inherit;
   }
+
+  .region-north,.region-south,.region-west,.region-east {
+    flex: 0 0;
+  }
+
+  .region-center {
+    flex: 1 1;
+  }
+
+
+
+  .region-layout-horizontal, .region-layout {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .region-layout-vertical {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+  }
+
   </style>
 </head>
 <body>

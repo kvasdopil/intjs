@@ -23,18 +23,14 @@ class Application extends React.Component {
       bbar: [{type:"Button", title: "Shalala"}]
     }
 
-    return <div style={{display: "flex", flexDirection: "row", alignItems: "stretch", height: "inherit"}}>
+    return <div className="region-layout-horizontal" style={{height: "inherit"}}>
         <div style={{padding: 10}}>
           Sidebar here
         </div>
-        <div style={{flexGrow: 1, alignItems:"stretch", display: "flex"}}>
-          <ListView {...config} />
-        </div>
+        <ListView {...config} region="center" />
       </div>;
   }
 }
-
-//<ListView {...config} />
 
 function propMap(store) {
   return {

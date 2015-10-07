@@ -4,7 +4,7 @@ import {fwdWrapper} from '../wrappers/FwdWrapper';
 import {natWrapper} from '../wrappers/NatWrapper';
 import {rdrWrapper} from '../wrappers/RdrWrapper';
 
-import Tbar from "./Tbar";
+import Tbar from "./Toolbar";
 
 export default class Big extends React.Component {
 

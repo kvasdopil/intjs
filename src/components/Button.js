@@ -2,7 +2,7 @@ import React from 'react';
 
 var btnIds = 0;
 
-export default class Btn extends React.Component {
+export default class Button extends React.Component {
   render() {
 
     var gl = "";

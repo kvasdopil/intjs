@@ -1,5 +1,5 @@
 import React from 'react';
-import Tbar from './Tbar';
+import Toolbar from './Toolbar';
 import Big from './Big';
 import Modal from './Modal';
 
@@ -9,7 +9,7 @@ export default class ListView extends React.Component {
     if(!this.props.title)
       return null;
 
-    return <div className="panel-heading" style={{flexShrink: 0}}>
+    return <div className="panel-heading region-north">
         <h3 className="panel-title">
           {this.props.title}
         </h3>
@@ -21,7 +21,7 @@ export default class ListView extends React.Component {
     if(!this.props.tbar)
       return null;
 
-    return <Tbar items={this.props.tbar} />
+    return <Toolbar items={this.props.tbar} />
   }
 
   renderBbar()
@@ -29,14 +29,14 @@ export default class ListView extends React.Component {
     if(!this.props.bbar)
       return null;
 
-    return  <Tbar items={this.props.bbar} bottom="1" />
+    return  <Toolbar items={this.props.bbar} bottom="1" />
   }
 
   renderContent()
   {
     var items = this.props.items ? this.props.items : [];
 
-    return <div className="list-group" style={{flexGrow: 1, overflowY: "auto"}}>
+    return <div className="list-group region-center" style={{overflowY: "auto"}}>
           {items.map(item => {
             return <li className="list-group-item">
                 <Big {...item} />
@@ -76,7 +76,11 @@ export default class ListView extends React.Component {
 
   render()
   {
-    return <div className="panel panel-default" style={{flexGrow:1, display: "flex", flexDirection: "column", alignItems: "stretch", marginBottom: 0}}>
+    var regionClass = "";
+    if(this.props.region)
+      regionClass = "region-" + this.props.region;
+
+    return <div className={"panel panel-default region-layout-vertical " + regionClass} style={{marginBottom: 0}}>
       {this.renderHeader()}
       {this.renderTbar()}
       {this.renderContent()}
