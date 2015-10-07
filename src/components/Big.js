@@ -21,17 +21,17 @@ export default class Big extends React.Component {
     else
       name = this.props.name;
 
-    return <tr style={{"vertical-align": "top"}}>
-        <td style={{width:"32", "vertical-align": "middle"}}>
+    return <tr style={{verticalAlign: "top"}}>
+        <td style={{width: 32, verticalAlign: "middle"}}>
           <img src={wrapper.icon()} width="32px" height="32px" />
         </td>
 
-        <td style={{"padding-left": "7px"}}>
-          <div><b>{name}</b></div>
-          <div style={{"font-size": "small"}} >{wrapper.description()}</div>
+        <td style={{paddingLeft: 7}}>
+          <div style={{fontSize: "larger", fontWeight: "bold"}}>{name}</div>
+          <div style={{fontSize: "small"}} >{wrapper.description()}</div>
         </td>
 
-        <td style={{"text-align": "right"}}>
+        <td style={{textAlign: "right"}}>
           <b><small>{this.props.status !== undefined ? this.props.status : ""}</small></b>
         </td>
       </tr>
@@ -43,10 +43,10 @@ export default class Big extends React.Component {
       return "";
 
     return <tr>
-        <td colSpan="999" style={{"padding-top":"10px", "font-size":"small"}} >
+        <td colSpan="999" style={{paddingTop:10, fontSize:"small"}} >
           <table>
             {wrapper.getReport().map(item => {
-              return <tr><td style={{"text-align": "right"}}>{item.name}:&nbsp;</td><td>{item.value}</td></tr>
+              return <tr><td style={{textAlign: "right"}}>{item.name}:&nbsp;</td><td>{item.value}</td></tr>
             })}
           </table>
         </td>
@@ -59,7 +59,7 @@ export default class Big extends React.Component {
       return "";
 
     return <div width="100%">
-          <Tbar style={{"padding-top": "10px"}} items={[
+          <Tbar style={{paddingTop: 10}} items={[
             {type: "Button", title: 'Подробнее...'},
             '->',
             {type: 'Button', title: 'Выключить', menu: ['Выключить','-','на 5 минут', 'на 20 минут', 'на 1 час', 'на 1 день', '-', 'Другое время...']},
