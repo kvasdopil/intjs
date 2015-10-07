@@ -14,7 +14,17 @@ export default class Button extends React.Component {
       caret = <span className="caret" style={{"margin-left": "5px"}} />
 
     var id = "dropdownMenu" + (btnIds++);
-    var disabled = (this.props.disabled) ? "disabled" : "";
+
+    var onClick = undefined;
+
+    if(this.props.disabled)
+      var disabled = "disabled";
+    else
+    {
+      disabled = "";
+      if(this.props.onClick)
+        onClick = this.props.onClick;
+    }
 
     if(this.props.menu)
       return <div className="btn-group">
@@ -31,7 +41,7 @@ export default class Button extends React.Component {
         </ul>
       </div>
 
-    return <button className={"btn btn-default " + disabled} type="button" data-toggle="modal" data-target="#myModal">
+    return <button className={"btn btn-default " + disabled} type="button" onClick={onClick}>
       {gl}{this.props.title}
     </button>
   }

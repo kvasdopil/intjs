@@ -11,7 +11,7 @@ class Application extends React.Component {
       items: this.props.forwards,
       tbar: [
         { type: "Button", title: "Добавить", glyph: 'plus', menu: ['Перенаправление', 'Редирект', 'Правило NAT'] },
-        { type: "Button", title: "Удалить", disabled: true },
+        { type: "Button", title: "Удалить", disabled: true, onClick: (a) => {console.log("hello world 2")} },
         '-',
         { type: "Button", title: "Действия", menu: ['Выключить', '-', 'Удалить'] },
         { type: "Button", title: "Изменить" },
@@ -20,7 +20,7 @@ class Application extends React.Component {
         '-',
         { type: "SearchBox" },
       ],
-      bbar: [{type:"Button", title: "Shalala"}]
+      bbar: [{type:"Button", title: "Shalala", onClick: (a) => {console.log("hello world 2")}  }]
     }
 
     return <div className="region-layout-horizontal" style={{height: "inherit"}}>
