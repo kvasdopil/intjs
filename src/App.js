@@ -25,7 +25,7 @@ class Application extends React.Component {
 
     return <div className="region-layout-horizontal" style={{height: "inherit"}}>
         <div style={{padding: 10}}>
-          Sidebar here
+          Navigation
         </div>
         <ListView {...config} region="center" />
       </div>;

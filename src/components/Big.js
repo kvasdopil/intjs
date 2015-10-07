@@ -39,10 +39,7 @@ export default class Big extends React.Component {
 
   renderReport(wrapper)
   {
-    if(!this.props.toggle)
-      return "";
-
-    return <tr>
+    return <tr style={{display: (this.props.toggle ? null : "none")}}>
         <td colSpan="999" style={{paddingTop:10, fontSize:"small"}} >
           <table>
             {wrapper.getReport().map(item => {
@@ -55,10 +52,7 @@ export default class Big extends React.Component {
 
   renderButtons(wrapper)
   {
-    if(!this.props.toggle)
-      return "";
-
-    return <div width="100%">
+    return <div width="100%" style={{display: (this.props.toggle ? null : "none")}}>
           <Tbar style={{paddingTop: 10}} items={[
             {type: "Button", title: 'Подробнее...'},
             '->',

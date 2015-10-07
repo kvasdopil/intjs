@@ -4,16 +4,32 @@ import Big from './Big';
 import Modal from './Modal';
 
 export default class ListView extends React.Component {
+  constructor(props)
+  {
+    super(props);
+    this.state = {selection: -1};
+  }
+
+  updateSelection(id)
+  {
+    if(this.state.selection == id)
+      return;
+
+    this.setState({selection: id});
+  }
+
   renderHeader()
   {
     if(!this.props.title)
       return null;
 
-    return <div className="panel-heading region-north">
+    return (
+      <div className="panel-heading region-north">
         <h3 className="panel-title">
           {this.props.title}
         </h3>
       </div>
+    );
   }
 
   renderTbar()
@@ -36,13 +52,18 @@ export default class ListView extends React.Component {
   {
     var items = this.props.items ? this.props.items : [];
 
-    return <div className="list-group region-center" style={{overflowY: "auto"}}>
-          {items.map(item => {
-            return <li className="list-group-item">
-                <Big {...item} />
+    return (
+      <div className="list-group region-center" style={{overflowY: "auto"}}>
+          {items.map((item,id) => {
+            var selected = (this.state.selection == id);
+            return <li className={"list-group-item " + (selected ? "list-item-selected" : "")} onClick={() => {this.updateSelection(id)}}>
+                <Big {...item} toggle={selected ? 1 : 0} />
               </li>
             })}
       </div>
+    );
+
+    //
   }
 
   renderDialogs()
@@ -80,13 +101,16 @@ export default class ListView extends React.Component {
     if(this.props.region)
       regionClass = "region-" + this.props.region;
 
-    return <div className={"panel panel-default region-layout-vertical " + regionClass} style={{marginBottom: 0}}>
-      {this.renderHeader()}
-      {this.renderTbar()}
-      {this.renderContent()}
-      {this.renderBbar()}
+    return (
 
-      {this.renderDialogs()}
-    </div>
+      <div className={"panel panel-default region-layout-vertical " + regionClass} style={{marginBottom: 0}}>
+        {this.renderHeader()}
+        {this.renderTbar()}
+        {this.renderContent()}
+        {this.renderBbar()}
+
+        {this.renderDialogs()}
+      </div>
+    );
   }
 }
