@@ -24,12 +24,11 @@ class Application extends React.Component {
         { type: "Button", alt: "Обновить", glyph: "refresh" },
         '-',
         { type: "SearchBox" },
-      ]
+      ],
+      bbar: [{type:"Button", title: "Shalala"}]
     }
 
-    return <div className="container">
-      <ListView {...config} />
-    </div>;
+    return <ListView {...config} />;
   }
 }
 

@@ -7,7 +7,7 @@ export default class ListView extends React.Component {
   render() {
     var items = this.props.items ? this.props.items : [];
 
-    return <div className="panel panel-default">
+    return <div className="panel panel-default" style={{height:"inherit", "margin":0}}>
       {this.props.title ? <div className="panel-heading"><h3 className="panel-title">{this.props.title}</h3></div> : ""}
       {this.props.tbar ? <Tbar items={this.props.tbar} /> : ""}
 
