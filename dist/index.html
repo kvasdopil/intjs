@@ -23,8 +23,6 @@
     flex: 1 1;
   }
 
-
-
   .region-layout-horizontal, .region-layout {
     align-items: stretch;
     display: flex;
@@ -37,9 +35,25 @@
     flex-direction: column;
   }
 
-  .list-item-selected {
+  .listview-item-selected {
     background-color: #eee;
   }
+
+  .listview-body {
+    /*borders for listview contents*/
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .listview-body > *:first-child {
+    margin-top: -1px;    /*remove border for first item of listview*/
+  }
+
+  .listview-body > *:last-child {
+    margin-bottom: -1px; /*remove border for first item of listview*/
+  }
+
+
 
   </style>
 </head>

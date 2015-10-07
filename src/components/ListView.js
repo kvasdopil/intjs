@@ -53,10 +53,10 @@ export default class ListView extends React.Component {
     var items = this.props.items ? this.props.items : [];
 
     return (
-      <div className="list-group region-center" style={{overflowY: "auto"}}>
+      <div className="list-group region-center listview-body" style={{overflowY: "auto"}}>
           {items.map((item,id) => {
             var selected = (this.state.selection == id);
-            return <li className={"list-group-item " + (selected ? "list-item-selected" : "")} onClick={() => {this.updateSelection(id)}}>
+            return <li className={"list-group-item " + (selected ? "listview-item-selected" : "")} onClick={() => {this.updateSelection(id)}}>
                 <Big {...item} toggle={selected ? 1 : 0} />
               </li>
             })}
