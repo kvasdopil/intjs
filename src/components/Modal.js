@@ -50,7 +50,12 @@ export default class Modal extends React.Component {
   }
 
   render() {
-      return <div className="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      if(this.props.id)
+        var id = this.props.id;
+      else
+        id = 'form' + (formId++);
+
+      return <div className="modal fade" id={id} tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import Toolbar from './Toolbar';
 import Big from './Big';
-import Modal from './Modal';
 
 export default class ListView extends React.Component {
   constructor(props)
@@ -66,35 +65,6 @@ export default class ListView extends React.Component {
     //
   }
 
-  renderDialogs()
-  {
-    var config = {
-      title: "Редактирование перенаправления",
-      items: [{
-          type: 'textbox',
-          label: 'Название',
-          id: 'name',
-          placeholder: "Введите имя"
-        },{
-          type:'email',
-          label:'Email',
-          id: 'email',
-          placeholder: "Введите адрес"
-        },{
-          type: 'password',
-          label:'Пароль',
-          id: 'pwd',
-          placeholder: "Введите пароль"
-        },{
-          type:'checkbox',
-          id: 'pingYaRu',
-          title: 'Пиновать ya.ru'
-        }]
-    };
-
-    return <Modal {...config} />;
-  }
-
   render()
   {
     var regionClass = "";
@@ -102,14 +72,11 @@ export default class ListView extends React.Component {
       regionClass = "region-" + this.props.region;
 
     return (
-
       <div className={"panel panel-default region-layout-vertical " + regionClass} style={{marginBottom: 0}}>
         {this.renderHeader()}
         {this.renderTbar()}
         {this.renderContent()}
         {this.renderBbar()}
-
-        {this.renderDialogs()}
       </div>
     );
   }
