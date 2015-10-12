@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDom from 'react-dom';
 import {App} from './App';
 
 import {createStore} from 'redux';
@@ -7,9 +8,9 @@ import reducer from './reducer';
 
 const store = createStore(reducer);
 
-React.render(
+ReactDom.render(
   <Provider store={store}>
-    {() => <App />}
+    <App />
   </Provider>,
   document.getElementById('app')
 );

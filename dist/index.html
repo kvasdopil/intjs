@@ -15,6 +15,16 @@
     height: inherit;
   }
 
+  /*overrides for react-bootstrap*/
+  .panel-heading {
+    flex: 0 0;
+  }
+
+  .panel-body {
+    flex: 0 0;
+  }
+
+  /* layouts */
   .region-north,.region-south,.region-west,.region-east {
     flex: 0 0;
   }
@@ -35,14 +45,33 @@
     flex-direction: column;
   }
 
-  .listview-item-selected {
+  /*components css*/
+  .listview {
+    margin-bottom: 0;
+  }
+
+  .listview-item:hover {
+    cursor: pointer;
     background-color: #eee;
   }
+
+  .listview-item-selected {
+    background-color: #eee;
+    /*border-width: 0px;*/
+  }
+
+  .listview-item-selected:focus {
+    background-color: #0f0;
+    /*border-width: 0px;*/
+  }
+
 
   .listview-body {
     /*borders for listview contents*/
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
+
+    overflow-y: auto;
   }
 
   .listview-body > *:first-child {
@@ -53,6 +82,9 @@
     margin-bottom: -1px; /*remove border for first item of listview*/
   }
 
+  .btns-right {
+    float: right !important;
+  }
 
 
   </style>

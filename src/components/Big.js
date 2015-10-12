@@ -4,9 +4,34 @@ import {fwdWrapper} from '../wrappers/FwdWrapper';
 import {natWrapper} from '../wrappers/NatWrapper';
 import {rdrWrapper} from '../wrappers/RdrWrapper';
 
-import Tbar from "./Toolbar";
+import Toolbar from "./Toolbar";
+
+import {
+    Panel,
+    ListGroup, ListGroupItem,
+    ButtonGroup, ButtonToolbar, Button,
+    Glyphicon,
+    DropdownButton,
+    MenuItem
+  } from 'react-bootstrap';
 
 export default class Big extends React.Component {
+
+  getWrapper(otype)
+  {
+    var wrapper = undefined;
+
+    switch(otype) {
+    case "Nat":
+      return natWrapper;
+
+    case "Fwd":
+      return fwdWrapper;
+
+    case "Rdr":
+      return rdrWrapper;
+    }
+  }
 
   getName() {
     if(this.props.name !== undefined)
@@ -42,9 +67,11 @@ export default class Big extends React.Component {
     return <tr style={{display: (this.props.toggle ? null : "none")}}>
         <td colSpan="999" style={{paddingTop:10, fontSize:"small"}} >
           <table>
-            {wrapper.getReport().map(item => {
-              return <tr><td style={{textAlign: "right"}}>{item.name}:&nbsp;</td><td>{item.value}</td></tr>
-            })}
+            <tbody>
+              {wrapper.getReport().map(item => {
+                return <tr><td style={{textAlign: "right"}}>{item.name}:&nbsp;</td><td>{item.value}</td></tr>
+              })}
+            </tbody>
           </table>
         </td>
       </tr>
@@ -52,8 +79,8 @@ export default class Big extends React.Component {
 
   renderButtons(wrapper)
   {
-    return <div width="100%" style={{display: (this.props.toggle ? null : "none")}}>
-          <Tbar style={{paddingTop: 10}} items={[
+    return <div width="100%" style={{paddingTop:7, display: (this.props.toggle ? null : "none")}}>
+          <Toolbar items={[
             {type: "Button", title: 'Подробнее...'},
             '->',
             {type: 'Button', title: 'Выключить', menu: ['Выключить','-','на 5 минут', 'на 20 минут', 'на 1 час', 'на 1 день', '-', 'Другое время...']},
@@ -64,26 +91,14 @@ export default class Big extends React.Component {
   }
 
   render() {
-    var wrapper = undefined;
-
-    switch(this.props.otype) {
-    case "Nat":
-      wrapper = natWrapper;
-      break;
-
-    case "Fwd":
-      wrapper = fwdWrapper;
-      break;
-
-    case "Rdr":
-      wrapper = rdrWrapper;
-      break;
-    }
+    var wrapper = this.getWrapper(this.props.otype);
 
     return <div>
       <table style={{width: "100%", padding: "7px"}}>
-        {this.renderMainInfo(wrapper)}
-        {this.renderReport(wrapper)}
+        <tbody>
+          {this.renderMainInfo(wrapper)}
+          {this.renderReport(wrapper)}
+        </tbody>
       </table>
 
       {this.renderButtons(wrapper)}

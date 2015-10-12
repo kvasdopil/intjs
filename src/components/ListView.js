@@ -1,6 +1,17 @@
 import React from 'react';
-import Toolbar from './Toolbar';
 import Big from './Big';
+import Toolbar from './Toolbar';
+
+import SearchBox from './SearchBox';
+
+import {
+    Panel,
+    ListGroup, ListGroupItem,
+    ButtonGroup, ButtonToolbar, Button,
+    Glyphicon,
+    DropdownButton,
+    MenuItem
+  } from 'react-bootstrap';
 
 export default class ListView extends React.Component {
   constructor(props)
@@ -17,67 +28,43 @@ export default class ListView extends React.Component {
     this.setState({selection: id});
   }
 
-  renderHeader()
+  renderTbar(tbar)
   {
-    if(!this.props.title)
+    if(!tbar)
       return null;
 
-    return (
-      <div className="panel-heading region-north">
-        <h3 className="panel-title">
-          {this.props.title}
-        </h3>
-      </div>
-    );
+    return <Toolbar items={tbar} className="region-north" />
   }
 
-  renderTbar()
+  renderBbar(bbar)
   {
-    if(!this.props.tbar)
+    if(!bbar)
       return null;
 
-    return <Toolbar items={this.props.tbar} />
+    return <Toolbar items={bbar} className="region-south" />
   }
 
-  renderBbar()
+  renderBody(items)
   {
-    if(!this.props.bbar)
-      return null;
+    return <ListGroup fill="true" className="region-center listview-body">
+      {this.props.items.map((item, id) => {
+        let selected = (id == this.state.selection);
 
-    return  <Toolbar items={this.props.bbar} bottom="1" />
-  }
-
-  renderContent()
-  {
-    var items = this.props.items ? this.props.items : [];
-
-    return (
-      <div className="list-group region-center listview-body" style={{overflowY: "auto"}}>
-          {items.map((item,id) => {
-            var selected = (this.state.selection == id);
-            return <li className={"list-group-item " + (selected ? "listview-item-selected" : "")} onClick={() => {this.updateSelection(id)}}>
-                <Big {...item} toggle={selected ? 1 : 0} />
-              </li>
-            })}
-      </div>
-    );
-
-    //
+        return <div className={"list-group-item listview-item " + (selected ? "listview-item-selected" : "")} onClick={() => {this.updateSelection(id)}} >
+          <Big {...item} toggle={selected ? "true" : null} />
+        </div>
+      })}
+      </ListGroup>
   }
 
   render()
   {
-    var regionClass = "";
-    if(this.props.region)
-      regionClass = "region-" + this.props.region;
-
     return (
-      <div className={"panel panel-default region-layout-vertical " + regionClass} style={{marginBottom: 0}}>
-        {this.renderHeader()}
-        {this.renderTbar()}
-        {this.renderContent()}
-        {this.renderBbar()}
-      </div>
+      <Panel header={this.props.title} className="region-center region-layout-vertical listview">
+        {this.renderTbar(this.props.tbar)}
+        {this.renderBody(this.props.items)}
+        {this.renderBbar(this.props.bbar)}
+      </Panel>
     );
   }
 }
