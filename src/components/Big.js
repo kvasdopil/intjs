@@ -81,11 +81,12 @@ export default class Big extends React.Component {
   {
     return <div width="100%" style={{paddingTop:7, display: (this.props.toggle ? null : "none")}}>
           <Toolbar items={[
-            {type: "Button", title: 'Подробнее...'},
+            {type: "Button", bsClass: 'link', title: 'Подробнее...'},
             '->',
             {type: 'Button', title: 'Выключить', menu: ['Выключить','-','на 5 минут', 'на 20 минут', 'на 1 час', 'на 1 день', '-', 'Другое время...']},
             {type: 'Button', title: 'Удалить'},
-            {type: 'Button', title: 'Редактировать'},
+            '-',
+            {type: 'Button', title: 'Изменить...'},
           ]} />
         </div>
   }

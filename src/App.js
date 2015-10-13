@@ -8,42 +8,22 @@ import {Modal,Button,Input,Panel} from 'react-bootstrap';
 import {connect} from 'react-redux';
 
 class Application extends React.Component {
+  constructor(props)
+  {
+    super(props);
+    this.state = {formShown: false};
+  }
+
   showForm()
   {
     console.log('show form');
-    $('#editForm').modal({})
+    this.setState({formShown: true});
   }
 
-  renderDialogs()
+  closeForm()
   {
-    // var config = {
-    //   title: "Редактирование перенаправления",
-    //   items: [{
-    //       type: 'textbox',
-    //       label: 'Название',
-    //       id: 'name',
-    //       placeholder: "Введите имя"
-    //     },{
-    //       type:'email',
-    //       label:'Email',
-    //       id: 'email',
-    //       placeholder: "Введите адрес"
-    //     },{
-    //       type: 'password',
-    //       label:'Пароль',
-    //       id: 'pwd',
-    //       placeholder: "Введите пароль"
-    //     },{
-    //       type:'checkbox',
-    //       id: 'pingYaRu',
-    //       title: 'Пиновать ya.ru'
-    //     }]
-    // };
-
-    // return <Modal id="editForm" {...config} />;
-
-
-
+    console.log('hide form');
+    this.setState({formShown: false});
   }
 
   render() {
@@ -61,16 +41,12 @@ class Application extends React.Component {
       items: data.forwards,
       tbar: [
         { title: "Добавить", glyph: 'plus', menu: ['Перенаправление', 'Редирект', 'Правило NAT'] },
-        { title: "Удалить", disabled: true },
-        '-',
-        { title: "Действия", menu: ['Выключить', '-', 'Удалить'] },
-        { title: "Изменить", onClick: () => this.showForm()},
         '->',
         { alt: "Обновить", glyph: "refresh" },
         '-',
         { type: "SearchBox" },
       ],
-      bbar: [{type:"Button", title: "Shalala", onClick: () => this.doSmth()}]
+      bbar: [{type:"Button", title: "Shalala", onClick: () => this.showForm()}]
     }
 
     return <div className="region-layout-horizontal" style={{height: "inherit"}}>
@@ -87,7 +63,7 @@ class Application extends React.Component {
 
         <ListView {...config} />
 
-        <Modal show={false}  bsSize="large">
+        <Modal show={this.state.formShown} onHidee={() => { this.closeForm(); }}  bsSize="large">
           <Modal.Header closeButton>
             <Modal.Title>Редактирование перенаправления</Modal.Title>
           </Modal.Header>
