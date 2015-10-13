@@ -2,6 +2,7 @@ import React from 'react';
 import ListView from './components/ListView'
 import * as actions from './actions';
 import Big from './components/Big';
+import FormView from './components/FormView';
 
 import {Modal,Button,Input,Panel} from 'react-bootstrap';
 
@@ -49,6 +50,53 @@ class Application extends React.Component {
       bbar: [{type:"Button", title: "Shalala", onClick: () => this.showForm()}]
     }
 
+    var formConfig = {
+      title: 'Редактирование перенаправления портов',
+      items: [
+        {title: 'Название'},
+
+        '-',
+        {title: 'Источник', placeholder: "(любой)", addonAfter:"...", width: 8, optional: true},
+        {title: 'Порт', placeholder: "(любой)", addonAfter:"...", width: 8, optional: true},
+
+        {type: '-', optional: true},
+        {title: 'Назначение', addonAfter:"...", width: 8, optional: true},
+        {title: 'Порт', addonAfter:"...", width: 8},
+
+        {type: '-', optional: true},
+        {title: 'Протокол', placeholder: "TCP/UDP", addonAfter:"...", width: 4, optional: true},
+        {title: 'Интерфейс', placeholder: "(любой)", addonAfter:"...", width: 4, optional: true},
+
+        '-',
+        {title: 'Перенаправить на адрес', addonAfter:"...", width: 8},
+        {title: 'Порт', addonAfter:"..."},
+        {title: 'Использовать NAT', type: 'checkbox'},
+
+        '-',
+        {title: 'Время действия', placeholder: "(любое)", addonAfter:"..."},
+        {title: 'Разрешить подключаться из локальной сети', type: 'checkbox'},
+        {title: 'Автоматически создать разрешающее правило', type: 'checkbox', checked: true},
+
+      // <Input type="text" label="Название:" labelClassName="col-xs-4" wrapperClassName="col-xs-6" />
+      //         <br />
+      //         <Input type="text" label="Источник:" labelClassName="col-xs-4" wrapperClassName="col-xs-8" addonAfter="..." placeholder="(любой)"/>
+      //         <Input type="text" label="Порт:" labelClassName="col-xs-4" wrapperClassName="col-xs-8"  addonAfter="..." placeholder="(любой)"/>
+      //         <br />
+      //         <Input type="text" label="Назначение:" labelClassName="col-xs-4" wrapperClassName="col-xs-8"  addonAfter="..."/>
+      //         <Input type="text" label="Порт:" labelClassName="col-xs-4" wrapperClassName="col-xs-8"  addonAfter="..."/>
+      //         <br />
+      //         <Input type="text" label="Протокол:" labelClassName="col-xs-4" wrapperClassName="col-xs-4" addonAfter="v"/>
+      //         <Input type="text" label="Интерфейс:" labelClassName="col-xs-4" wrapperClassName="col-xs-8"  addonAfter="..." placeholder="(любой)"/>
+      //         <br />
+      //         <Input type="text" label="Перенаправить на адрес:" labelClassName="col-xs-4" wrapperClassName="col-xs-8"  addonAfter="..."/>
+      //         <Input type="text" label="Порт:" labelClassName="col-xs-4" wrapperClassName="col-xs-8" addonAfter="..."/>
+      //         <Input type="checkbox" label="Использовать NAT" wrapperClassName="col-xs-offset-4 col-xs-8" />
+      //         <br />
+      //         <Input type="text" label="Время действия" labelClassName="col-xs-4" wrapperClassName="col-xs-8" placeholder="(любое)" addonAfter="..."/>
+
+      ]
+    }
+
     return <div className="region-layout-horizontal" style={{height: "inherit"}}>
         <div style={{padding: 10}}>
           <Panel header="Пользователи и статистика">
@@ -63,38 +111,7 @@ class Application extends React.Component {
 
         <ListView {...config} />
 
-        <Modal show={this.state.formShown} onHidee={() => { this.closeForm(); }}  bsSize="large">
-          <Modal.Header closeButton>
-            <Modal.Title>Редактирование перенаправления</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <form className="form-horizontal">
-              <Input type="text" label="Название:" labelClassName="col-xs-4" wrapperClassName="col-xs-6" />
-              <br />
-              <Input type="text" label="Источник:" labelClassName="col-xs-4" wrapperClassName="col-xs-8" addonAfter="..." placeholder="(любой)"/>
-              <Input type="text" label="Порт:" labelClassName="col-xs-4" wrapperClassName="col-xs-8"  addonAfter="..." placeholder="(любой)"/>
-              <br />
-              <Input type="text" label="Назначение:" labelClassName="col-xs-4" wrapperClassName="col-xs-8"  addonAfter="..."/>
-              <Input type="text" label="Порт:" labelClassName="col-xs-4" wrapperClassName="col-xs-8"  addonAfter="..."/>
-              <br />
-              <Input type="text" label="Протокол:" labelClassName="col-xs-4" wrapperClassName="col-xs-4" addonAfter="v"/>
-              <Input type="text" label="Интерфейс:" labelClassName="col-xs-4" wrapperClassName="col-xs-8"  addonAfter="..." placeholder="(любой)"/>
-              <br />
-              <Input type="text" label="Перенаправить на адрес:" labelClassName="col-xs-4" wrapperClassName="col-xs-8"  addonAfter="..."/>
-              <Input type="text" label="Порт:" labelClassName="col-xs-4" wrapperClassName="col-xs-8" addonAfter="..."/>
-              <Input type="checkbox" label="Использовать NAT" wrapperClassName="col-xs-offset-4 col-xs-8" />
-              <br />
-              <Input type="text" label="Время действия" labelClassName="col-xs-4" wrapperClassName="col-xs-8" placeholder="(любое)" addonAfter="..."/>
-              <Input type="checkbox" label="Разрешить подключаться из локальной сети" wrapperClassName="col-xs-offset-4 col-xs-8" />
-              <Input type="checkbox" label="Автоматически создать разрешающее правило" wrapperClassName="col-xs-offset-4 col-xs-8" checked/>
-              <Button bsStyle="link" class="striped">Меньше параметров...</Button>
-            </form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button bsStyle="primary">Сохранить</Button>
-            <Button>Отмена</Button>
-          </Modal.Footer>
-        </Modal>
+        <FormView show={this.state.formShown} onClose={() => this.closeForm()} {...formConfig} />
       </div>;
   }
 }
