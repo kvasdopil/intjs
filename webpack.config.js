@@ -2,7 +2,7 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: [
-    'webpack-dev-server/client?http://192.168.17.202:8080',
+    'webpack-dev-server/client?http://127.0.0.1:8080',
     'webpack/hot/only-dev-server',
     './src/index.js'
   ],

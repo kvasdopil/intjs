@@ -3,8 +3,9 @@ import ListView from './components/ListView'
 import * as actions from './actions';
 import Big from './components/Big';
 import FormView from './components/FormView';
+import Toolbar from './components/Toolbar';
 
-import {Modal,Button,Input,Panel} from 'react-bootstrap';
+import {Modal,Button,Input,Panel,Table,Glyphicon} from 'react-bootstrap';
 
 import {connect} from 'react-redux';
 
@@ -25,6 +26,62 @@ class Application extends React.Component {
   {
     console.log('hide form');
     this.setState({formShown: false});
+  }
+
+  renderTree()
+  {
+    return <Panel className="region-center region-layout-vertical" header="i am tree">
+      <Toolbar items={[{title:'Add'},{title:"Remove"},'-',{title:'Edit'}]} className="region-north"/>
+      <Table fill={true} striped hover condensed>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Ip</th>
+            <th>Traffic/day</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><Glyphicon glyph="triangle-bottom" className='w16'/>
+
+              <span className='w16 users'/>
+              Админы
+            </td>
+            <td>192.168.1.2</td>
+            <td>0 mb</td>
+          </tr>
+          <tr>
+            <td>
+              <Glyphicon glyph="none" className='w16'/>
+              <Glyphicon glyph="triangle-right" className='w16'/>
+              <span className='w16 users'/>
+              Бездельники
+            </td>
+            <td>192.168.1.2</td>
+            <td>0 mb</td>
+          </tr>
+          <tr>
+            <td>
+              <Glyphicon glyph="none" className='w16'/>
+              <Glyphicon glyph="none" className='w16'/>
+              <span className='w16 user'/>
+              Мариванна
+             </td>
+            <td>192.168.1.2</td>
+            <td>0 mb</td>
+          </tr>
+          <tr>
+            <td><Glyphicon glyph="none" className='w16'/>
+
+              <span className='w16 admin'/>
+            Директор
+            </td>
+            <td>192.168.1.2</td>
+            <td>0 mb</td>
+          </tr>
+        </tbody>
+      </Table>
+    </Panel>
   }
 
   render() {
@@ -109,7 +166,10 @@ class Application extends React.Component {
           </Panel>
         </div>
 
-        <ListView {...config} />
+        {//<ListView {...config} />
+        }
+
+        {this.renderTree()}
 
         <FormView show={this.state.formShown} onClose={() => this.closeForm()} {...formConfig} />
       </div>;
